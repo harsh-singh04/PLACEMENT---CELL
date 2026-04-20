@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin – Placement Cell</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="topbar">
+    <div class="tb-left">
+      <div class="tb-logo">Placement<span>Cell</span></div>
+      <div class="role-badge">Admin</div>
+    </div>
+    <div class="tb-right">
+      <div class="user-chip">
+        <div class="user-avatar" id="user-avatar">A</div>
+        <span id="user-name">Admin</span>
+      </div>
+      <button class="btn-logout" onclick="doLogout()">Logout</button>
+    </div>
+  </div>
+
+  <!-- Layout -->
+  <div class="main-layout">
+    <div class="sidebar">
+      <div class="nav-section">
+        <div class="nav-section-title">Navigation</div>
+        <div class="nav-item active" onclick="showPage('dashboard')">  <span class="ni-icon">📊</span> Dashboard</div>
+        <div class="nav-item"        onclick="showPage('all-drives')"> <span class="ni-icon">🏢</span> All Drives</div>
+        <div class="nav-item"        onclick="showPage('add-drive')">  <span class="ni-icon">➕</span> Add Drive</div>
+        <div class="nav-item"        onclick="showPage('applications')"><span class="ni-icon">📋</span> Applications</div>
+      </div>
+      <div class="nav-section" style="margin-top:auto; border-top:1px solid var(--border); padding-top:1rem;">
+        <div class="nav-section-title">Account</div>
+        <div class="nav-item" onclick="showPage('profile')"><span class="ni-icon">👤</span> My Profile</div>
+      </div>
+      <!-- Sidebar profile preview -->
+      <div id="sidebar-profile" style="padding:1rem;margin:0 0.5rem 1rem;background:var(--card);border:1px solid var(--border);border-radius:12px;font-size:0.78rem;color:var(--muted);"></div>
+    </div>
+
+    <div class="content" id="main-content"></div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
+    <div class="modal" id="modal-content"></div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast"></div>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/users.js"></script>
+  <script src="../js/otp.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/admin.js"></script>
+  <script src="../js/modal.js"></script>
+  <script src="../js/toast.js"></script>
+  <script>
+    checkAuth('admin');
+    renderUserChip();
+    renderSidebarProfile();
+    showPage('dashboard');
+  </script>
+</body>
+</html>

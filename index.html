@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Placement Cell Portal – Login</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/auth.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+</head>
+<body class="auth-body">
+
+  <div class="auth-glow"></div>
+  <div class="auth-glow2"></div>
+
+  <div class="auth-wrapper">
+
+    <!-- ═══ LEFT BRANDING ═══ -->
+    <div class="auth-left">
+      <div class="brand">
+        <div class="brand-icon">🎓</div>
+        <div class="brand-name">Placement<span>Cell</span></div>
+        <div class="brand-sub">Campus Recruitment Portal</div>
+      </div>
+      <div class="auth-features">
+        <div class="feat-item">
+          <span class="feat-icon">🔐</span>
+          <div><strong>OTP Verified Accounts</strong>
+            <p>Every account is verified via a 6-digit OTP sent to your email</p></div>
+        </div>
+        <div class="feat-item">
+          <span class="feat-icon">🏢</span>
+          <div><strong>Live Drives</strong>
+            <p>Browse ongoing &amp; upcoming placement drives from top companies</p></div>
+        </div>
+        <div class="feat-item">
+          <span class="feat-icon">📝</span>
+          <div><strong>One-Click Apply</strong>
+            <p>Apply to multiple companies instantly with your saved profile</p></div>
+        </div>
+        <div class="feat-item">
+          <span class="feat-icon">🛡️</span>
+          <div><strong>Admin Controls</strong>
+            <p>Admins can post drives, manage listings, and review applications</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ RIGHT FORM PANEL ═══ -->
+    <div class="auth-right">
+      <div class="auth-card">
+
+        <!-- Tab Switcher -->
+        <div class="auth-tabs">
+          <button class="auth-tab active" id="tab-login"  onclick="switchTab('login')">Login</button>
+          <button class="auth-tab"        id="tab-signup" onclick="switchTab('signup')">Create Account</button>
+        </div>
+
+        <!-- ══════════ LOGIN FORM ══════════ -->
+        <div id="form-login">
+          <div class="form-section-title">Welcome back 👋</div>
+          <div class="form-section-sub">Login to your placement portal account</div>
+
+          <div class="field-group mt">
+            <label>Email Address</label>
+            <input type="email" id="l-email" placeholder="your@email.com"
+              onkeydown="if(event.key==='Enter') doLogin()"/>
+          </div>
+          <div class="field-group mt">
+            <label>Password</label>
+            <div class="input-wrap">
+              <input type="password" id="l-pwd" placeholder="••••••••"
+                onkeydown="if(event.key==='Enter') doLogin()"/>
+              <span class="eye-toggle" onclick="togglePwd('l-pwd',this)">👁</span>
+            </div>
+          </div>
+
+          <div id="login-error" class="form-error" style="display:none;"></div>
+          <button class="btn-auth" onclick="doLogin()">Login to Portal →</button>
+
+          <div class="divider"><span>or</span></div>
+          <div class="switch-hint">Don't have an account?
+            <a href="#" onclick="switchTab('signup');return false;">Create one →</a></div>
+        </div>
+
+        <!-- ══════════ SIGNUP — STEP 1: DETAILS ══════════ -->
+        <div id="form-signup" style="display:none;">
+
+          <!-- Step indicator -->
+          <div class="step-bar">
+            <div class="step active" id="step-dot-1"><span>1</span><div class="step-label">Details</div></div>
+            <div class="step-line"></div>
+            <div class="step" id="step-dot-2"><span>2</span><div class="step-label">Verify OTP</div></div>
+            <div class="step-line"></div>
+            <div class="step" id="step-dot-3"><span>3</span><div class="step-label">Done</div></div>
+          </div>
+
+          <!-- Step 1 content -->
+          <div id="signup-step1">
+            <div class="form-section-title">Create Account ✨</div>
+            <div class="form-section-sub">Fill your details — we'll send an OTP to verify your email</div>
+
+            <!-- Role Picker -->
+            <div class="role-pick-row">
+              <div class="role-pick active" id="rp-student" onclick="pickRole('student')">
+                <span>🧑‍💻</span> Student
+              </div>
+              <div class="role-pick" id="rp-admin" onclick="pickRole('admin')">
+                <span>🛡️</span> Admin
+              </div>
+            </div>
+
+            <div id="admin-code-wrap" style="display:none;">
+              <div class="field-group mt">
+                <label>Admin Secret Code</label>
+                <input type="password" id="s-admincode" placeholder="Enter admin secret code"/>
+              </div>
+              <div class="form-hint">💡 Default admin code: <code>ADMIN@2026</code></div>
+            </div>
+
+            <div class="two-col mt">
+              <div class="field-group">
+                <label>First Name</label>
+                <input type="text" id="s-fname" placeholder="Rahul"/>
+              </div>
+              <div class="field-group">
+                <label>Last Name</label>
+                <input type="text" id="s-lname" placeholder="Sharma"/>
+              </div>
+            </div>
+
+            <div class="field-group mt">
+              <label>Email Address</label>
+              <input type="email" id="s-email" placeholder="your@college.edu"/>
+              <div class="form-hint" style="margin-top:5px;">📧 A 6-digit OTP will be sent to this email for verification.</div>
+            </div>
+
+            <div id="student-fields">
+              <div class="two-col mt">
+                <div class="field-group">
+                  <label>Branch / Dept.</label>
+                  <input type="text" id="s-branch" placeholder="e.g. CSE"/>
+                </div>
+                <div class="field-group">
+                  <label>Batch Year</label>
+                  <input type="text" id="s-batch" placeholder="e.g. 2026"/>
+                </div>
+              </div>
+              <div class="field-group mt">
+                <label>CGPA</label>
+                <input type="text" id="s-cgpa" placeholder="e.g. 8.2"/>
+              </div>
+            </div>
+
+            <div class="field-group mt">
+              <label>Password</label>
+              <div class="input-wrap">
+                <input type="password" id="s-pwd" placeholder="Minimum 6 characters"
+                  oninput="checkStrength(this.value)"/>
+                <span class="eye-toggle" onclick="togglePwd('s-pwd',this)">👁</span>
+              </div>
+            </div>
+            <div class="pwd-strength-wrap" id="pwd-strength-wrap" style="display:none;">
+              <div class="pwd-bar"><div id="pwd-bar-fill"></div></div>
+              <span id="pwd-strength-label"></span>
+            </div>
+
+            <div class="field-group mt">
+              <label>Confirm Password</label>
+              <div class="input-wrap">
+                <input type="password" id="s-cpwd" placeholder="Re-enter password"/>
+                <span class="eye-toggle" onclick="togglePwd('s-cpwd',this)">👁</span>
+              </div>
+            </div>
+
+            <div id="signup-error" class="form-error" style="display:none;"></div>
+            <button class="btn-auth" id="btn-send-otp" onclick="sendOTP()">
+              Send Verification OTP →
+            </button>
+
+            <div class="divider"><span>or</span></div>
+            <div class="switch-hint">Already have an account?
+              <a href="#" onclick="switchTab('login');return false;">Login →</a></div>
+          </div>
+
+          <!-- ══════════ STEP 2: OTP VERIFY ══════════ -->
+          <div id="signup-step2" style="display:none;">
+            <div class="otp-email-icon">📬</div>
+            <div class="form-section-title">Check Your Email</div>
+            <div class="form-section-sub">
+              We sent a 6-digit OTP to<br/>
+              <strong id="otp-email-display" style="color:var(--accent)"></strong>
+            </div>
+
+            <!-- OTP boxes -->
+            <div class="otp-boxes" id="otp-boxes">
+              <input class="otp-box" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]"
+                oninput="otpInput(this,0)" onkeydown="otpKey(event,0)"/>
+              <input class="otp-box" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]"
+                oninput="otpInput(this,1)" onkeydown="otpKey(event,1)"/>
+              <input class="otp-box" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]"
+                oninput="otpInput(this,2)" onkeydown="otpKey(event,2)"/>
+              <input class="otp-box" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]"
+                oninput="otpInput(this,3)" onkeydown="otpKey(event,3)"/>
+              <input class="otp-box" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]"
+                oninput="otpInput(this,4)" onkeydown="otpKey(event,4)"/>
+              <input class="otp-box" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]"
+                oninput="otpInput(this,5)" onkeydown="otpKey(event,5)"/>
+            </div>
+
+            <!-- Timer -->
+            <div class="otp-timer" id="otp-timer-row">
+              OTP expires in <span id="otp-countdown" style="color:var(--accent);font-family:var(--mono);font-weight:600;">10:00</span>
+            </div>
+
+            <!-- Hint box showing OTP (dev mode) -->
+            <div class="otp-devhint" id="otp-devhint">
+              <div class="otp-devhint-title">📌 Demo Mode — OTP Preview</div>
+              <div>Since this is a frontend-only demo, your OTP is:</div>
+              <div class="otp-devhint-code" id="otp-devhint-code">——</div>
+              <div style="font-size:0.72rem;opacity:0.7;margin-top:4px;">In production, this would be sent to your actual email via an email service (SendGrid, SMTP, etc.)</div>
+            </div>
+
+            <div id="otp-error" class="form-error" style="display:none;"></div>
+
+            <button class="btn-auth" onclick="verifyOTP()">Verify &amp; Create Account ✓</button>
+
+            <div class="otp-resend-row">
+              Didn't receive it?
+              <button class="btn-resend" id="btn-resend" onclick="resendOTP()" disabled>
+                Resend OTP <span id="resend-timer"></span>
+              </button>
+            </div>
+            <div style="text-align:center;margin-top:0.75rem;">
+              <a href="#" onclick="backToStep1();return false;"
+                style="font-size:0.82rem;color:var(--muted);text-decoration:none;">← Edit details</a>
+            </div>
+          </div>
+
+          <!-- ══════════ STEP 3: SUCCESS ══════════ -->
+          <div id="signup-step3" style="display:none;text-align:center;padding:1rem 0;">
+            <div class="success-checkmark">✓</div>
+            <div class="form-section-title" style="margin-top:1rem;">Account Created! 🎉</div>
+            <div class="form-section-sub" style="margin-bottom:1.5rem;">
+              Your email has been verified. Redirecting you to the portal…
+            </div>
+            <div class="redirect-bar"><div id="redirect-fill"></div></div>
+          </div>
+
+        </div><!-- /form-signup -->
+
+      </div><!-- /auth-card -->
+    </div><!-- /auth-right -->
+  </div><!-- /auth-wrapper -->
+
+  <script src="js/data.js"></script>
+  <script src="js/users.js"></script>
+  <script src="js/otp.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>
